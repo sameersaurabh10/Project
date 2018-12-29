@@ -32,8 +32,6 @@ int main(int argc, char *argv[])
 
     while(1) {
         memset(buffer, 0, sizeof(buffer));
-		usleep(1000);
-        printf("\nclient >> ");
         if (!fgets(buffer, 1024, stdin)) {
             print_error("Failed to read from stdin");
         }

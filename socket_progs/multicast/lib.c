@@ -84,6 +84,8 @@ void *read_handler(void *data)
         if ((read_bytes = recv(fd, buffer, 1024, 0)) > 0) {
             buffer[read_bytes] = '\0';
             printf("\nserver >> %s", buffer);
+			printf("\nclient >> ");
+            fflush(stdout);
         }   
     }   
 }
