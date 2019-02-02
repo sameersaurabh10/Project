@@ -1,0 +1,5 @@
+-> Create your own scrip and paste into /etc/init.d/
+-> Make it executable
+	sudo chmod +x ./script
+-> Execute the following command, will create soft link in rc*.d/ directory
+	update-rc.d <yourScriptName> defaults

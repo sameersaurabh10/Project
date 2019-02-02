@@ -1,0 +1,10 @@
+========================================
+This code is written by sameer saurabh.
+========================================
+
+Description:
+	This program is written to test the power supply of system.
+
+Purpose:
+	This will check power supply to system. If power supply is not there system will shutdown automatically
+
