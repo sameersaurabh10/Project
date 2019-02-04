@@ -2,7 +2,7 @@
  * Function will check the power supply status.				 *
  *														 	 *
  * If power supply is not there, it shut's down the system by* 
- * sending a gentle reminder(By calling shutdown)			 *
+ * sending a gentle shutdown call							 *
  *===========================================================*/
 
 
@@ -49,19 +49,8 @@ int main(int argc, char *argv[])
 	pid_t pid, sid;
 	FILE *fp = NULL;
 	char buffer[128];
-	int time;
-	char cmd[128];
-   
-	if (argc != 2) {
-		my_syslog("Command line input are not correct(Read manual)", LOG_INFO);	
-		exit (EXIT_FAILURE);
-	}
-
-	if ((time = atoi(atgv[1])) < 0) {
-		my_syslog("Command line input are not correct(Read manual)", LOG_INFO);	
-		exit (EXIT_FAILURE);
-
-	}
+	char temp[] = "Discharging"; /*String to used during checking powersupply comparision*/
+	char read_from_file[128];
 
 	my_syslog_init();
 	    
@@ -108,22 +97,30 @@ int main(int argc, char *argv[])
 	my_syslog("Starting monitor on power supply for time interval of 2 second", LOG_INFO); 
 	
 	while (TRUE) {
-		fp = popen("cat /sys/class/power_supply/BAT1/power_now", "r");
+		fp = popen("cat /sys/class/power_supply/BAT1/uevent", "r");
 		if (fp == NULL) {
 			my_syslog("Failed to open power_now file", LOG_WARNING);
-		}	
-		/* Read the output a line at a time - and checks power supply is on or off. 
-		 * if off calls system call shutdown the system gently*/
-		while (fgets(buffer, sizeof(buffer)-1, fp) != NULL) {
-			if (atoi(buffer) > 0) {
-				my_syslog("Power Supply stopped. Shuting down system(in 3 second)...", LOG_ERR);
-				my_closelog();
-				system("shutdown now");
-			}
-		}
-		if (fp)
-			pclose(fp);
+		}else {
+			/* Read the output a line at a time - and checks power supply is on or off. 
+			 * if off calls system call shutdown the system gently*/
+			while (fgets(buffer, sizeof(buffer)-1, fp) != NULL) {
+				if (sscanf(buffer, "POWER_SUPPLY_STATUS=%s", read_from_file) > 0 ) {
+					if (!memcmp(read_from_file, temp, sizeof(temp))) {
+						my_syslog("Shuting down system, because power supply is not there", LOG_ERR);
+						system("shutdown -h now");
+		            }
+					break;
+				}
+			}//END While loop
+
+			if (fp)
+				pclose(fp);
+		}//END of else
+
+		/*Sleeping checking battery status for 2 second */
 		sleep(2);
-	}
+
+	}//END of while
 	exit(EXIT_SUCCESS);
-}
+
+}//END of main function
