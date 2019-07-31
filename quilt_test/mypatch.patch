@@ -1,0 +1,26 @@
+Index: quilt_test/abc.txt
+===================================================================
+--- quilt_test.orig/abc.txt
++++ quilt_test/abc.txt
+@@ -1 +1,3 @@
+ This is abc.txt file
++
++This is chaged after adding to patch series
+Index: quilt_test/mno.txt
+===================================================================
+--- quilt_test.orig/mno.txt
++++ quilt_test/mno.txt
+@@ -1 +1,4 @@
+ This is mno.txt file
++
++
++This is chaged after adding to patch series
+Index: quilt_test/xyz.txt
+===================================================================
+--- quilt_test.orig/xyz.txt
++++ quilt_test/xyz.txt
+@@ -1 +1,4 @@
+ This is xyz.txt file
++
++
++This is chaged after adding to patch series
