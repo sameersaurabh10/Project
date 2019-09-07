@@ -24,7 +24,6 @@ char* rtrim(char* str) {
         end--;
     }
 
-	printf("Before returning...");
     *(end + 1) = '\0';
     return str;
 }
