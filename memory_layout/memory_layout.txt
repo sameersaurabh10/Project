@@ -1,0 +1,37 @@
+Program can be devided into four sections-
+	- Heap		:	(Allocated dynamically)
+	- Stack		:	(Vairabled in function)
+	- Text		:	(Program instruction)
+	- Data		:	(Location of vairables)
+
+Data section can be devided into two sections-
+	- Initialized		:	(Constant literals)
+	- Un-Initialized	:	(.bss	:	Basic Service Set)
+
+Data can have two access-
+	- Global	:	(Visiable to other files. eg: gloable variable)
+	- Local		:	(Visiable till it's scope. eg- file scope, function scope etc)
+
+Local data have two types-
+	- Local to block	:	(static varirable declared in file scope)	
+	- Local to file		:	(variables declared in function scope)
+
+Notes:-
+=======
+	- "nm command" show global data section in upper case and lower case for local.
+
+	- Since static variables are not global that's why "nm command" shows with lower case.
+
+	- Static uninitialized variable goes to .bss(both global and local)
+		and with nm command output comes with 'b'.
+	
+	- Static initialized variables goes to read only(static const), data (non-const)
+		and with nm command output comes with 'r'(static const) and 'd'(non-const)
+
+	- Variables local to function/local goes to stack apart from static variables
+
+	- Un-initialized global variables goes to .bss and "nm command" shows with 'B'
+	
+	- Initialized gloabl variables goes to data section and "nm command" shows with 'D'
+
+	

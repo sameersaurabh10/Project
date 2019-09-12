@@ -4,12 +4,35 @@
 
 MODULE_LICENSE("Dual BSD/GPL");
 
-static int export_test(int num)
+int export_test_test(int num)
 {
 	printk("Invoked from another module : %d\n", num);
 	return 20;
 }
-EXPORT_SYMBOL_GPL(export_test);
+EXPORT_SYMBOL_GPL(export_test_test);
+
+static
+int export_test_view(int num)
+{
+	printk("Invoked from another module : %d\n", num);
+	return 20;
+}
+EXPORT_SYMBOL(export_test_view);
+
+int export_test_display(int num)
+{
+	printk("Invoked from another module : %d\n", num);
+	return 20;
+}
+EXPORT_SYMBOL_GPL(export_test_display);
+
+static
+int export_test_help(int num)
+{
+	printk("Invoked from another module : %d\n", num);
+	return 20;
+}
+EXPORT_SYMBOL_GPL(export_test_help);
 
 //EXPORT_SYMBOL(export_test);
 
