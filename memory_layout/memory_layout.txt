@@ -34,4 +34,15 @@ Notes:-
 	
 	- Initialized gloabl variables goes to data section and "nm command" shows with 'D'
 
-	
+
+
+Dealing with multiple defined symbols:-
+=======================================
+Rule 1: 
+	- Multiple strong symbols (with same variable name) are not allowed.
+
+Rule 2:-
+	- Given a strong symbol and multiple weak symbols, choose the strong symbol.
+
+Rule 3:-
+	- Given multiple weak symbols, choose any of the weak symbols.
